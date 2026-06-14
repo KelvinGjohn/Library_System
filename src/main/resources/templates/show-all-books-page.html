@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Books</title></head>
+<body>
+<h1>Library Books</h1>
+
+<p th:if="${filter}" style="color:blue;">Filter: <strong th:text="${filter}"></strong>
+  | <a href="/book/all">Clear filter</a></p>
+
+<div>
+  <a href="/book/add">+ Add Book</a> &nbsp;|&nbsp;
+  <a href="/book/all">All Books</a> &nbsp;|&nbsp;
+  <form style="display:inline" action="/book/by-author" method="get">
+    Author: <input name="author" size="15"/> <button type="submit">Search</button>
+  </form> &nbsp;|&nbsp;
+  <form style="display:inline" action="/book/by-rating" method="get">
+    Min rating: <input name="rating" type="number" step="0.1" min="0" max="5" size="4"/>
+    <button type="submit">Filter</button>
+  </form>
+</div>
+<br/>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Title</th><th>Author</th><th>Year</th>
+      <th>ISBN</th><th>Rating</th><th>Condition</th><th>Rarity</th>
+      <th>Department</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="b : ${books}">
+      <td th:text="${b.idb}"></td>
+      <td th:text="${b.title}"></td>
+      <td th:text="${b.author}"></td>
+      <td th:text="${b.year}"></td>
+      <td th:text="${b.isbn}"></td>
+      <td th:text="${b.rating}"></td>
+      <td th:text="${b.condition}"></td>
+      <td th:text="${b.rarity}"></td>
+      <td th:text="${b.libraryDepartment.specialization}"></td>
+      <td>
+        <a th:href="@{/book/update/{id}(id=${b.idb})}">Edit</a> |
+        <a th:href="@{/book/delete/{id}(id=${b.idb})}"
+           onclick="return confirm('Delete this book?')">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

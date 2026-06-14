@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>New Checkout</title></head>
+<body>
+<h1>Checkout a Book</h1>
+
+<p th:if="${error}" style="color:red;" th:text="${error}"></p>
+
+<form action="/checkout/new" method="post">
+
+  <label>Reader:</label><br/>
+  <select name="readerId">
+    <option th:each="r : ${readers}"
+            th:value="${r.idr}"
+            th:text="${r.name + ' ' + r.surname + ' (' + r.libraryUserNumber + ')'}">
+    </option>
+  </select>
+  <br/><br/>
+
+  <label>Book:</label><br/>
+  <select name="bookId">
+    <option th:each="b : ${books}"
+            th:value="${b.idb}"
+            th:text="${b.title + ' — ' + b.author}">
+    </option>
+  </select>
+  <br/><br/>
+
+  <button type="submit">Checkout</button>
+  <a href="/checkout/active">Cancel</a>
+</form>
+</body>
+</html>

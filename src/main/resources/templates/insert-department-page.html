@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Add Department</title></head>
+<body>
+<h1>Add Library Department</h1>
+<form th:action="@{/department/add}" th:object="${department}" method="post">
+
+  <label>Specialization:</label><br/>
+  <input type="text" th:field="*{specialization}"/>
+  <span th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}" style="color:red;"></span>
+  <br/><br/>
+
+  <label>Employees:</label><br/>
+  <input type="text" th:field="*{employees}" placeholder="e.g. Alice, Bob"/>
+  <span th:if="${#fields.hasErrors('employees')}" th:errors="*{employees}" style="color:red;"></span>
+  <br/><br/>
+
+  <label>Working Times:</label><br/>
+  <input type="text" th:field="*{workingTimes}" placeholder="e.g. Mon-Fri 09:00-17:00"/>
+  <span th:if="${#fields.hasErrors('workingTimes')}" th:errors="*{workingTimes}" style="color:red;"></span>
+  <br/><br/>
+
+  <button type="submit">Save</button>
+  <a href="/department/all">Cancel</a>
+</form>
+</body>
+</html>

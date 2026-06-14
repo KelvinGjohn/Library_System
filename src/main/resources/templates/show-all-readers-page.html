@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Readers</title></head>
+<body>
+<h1>Library Readers</h1>
+<a href="/reader/add">+ Add Reader</a>
+<br/><br/>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Name</th><th>Surname</th>
+      <th>User Number</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="r : ${readers}">
+      <td th:text="${r.idr}"></td>
+      <td th:text="${r.name}"></td>
+      <td th:text="${r.surname}"></td>
+      <td th:text="${r.libraryUserNumber}"></td>
+      <td>
+        <a th:href="@{/reader/update/{id}(id=${r.idr})}">Edit</a> |
+        <a th:href="@{/reader/current/{id}(id=${r.idr})}">Current Books</a> |
+        <a th:href="@{/reader/history/{id}(id=${r.idr})}">History</a> |
+        <a th:href="@{/reader/delete/{id}(id=${r.idr})}"
+           onclick="return confirm('Delete reader?')">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

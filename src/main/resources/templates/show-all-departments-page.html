@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Departments</title></head>
+<body>
+<h1>Library Departments</h1>
+<a href="/department/add">+ Add Department</a>
+<br/><br/>
+
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>ID</th><th>Specialization</th><th>Employees</th>
+      <th>Working Times</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="d : ${departments}">
+      <td th:text="${d.idld}"></td>
+      <td th:text="${d.specialization}"></td>
+      <td th:text="${d.employees}"></td>
+      <td th:text="${d.workingTimes}"></td>
+      <td>
+        <a th:href="@{/department/update/{id}(id=${d.idld})}">Edit</a> |
+        <a th:href="@{/department/delete/{id}(id=${d.idld})}"
+           onclick="return confirm('Delete department?')">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

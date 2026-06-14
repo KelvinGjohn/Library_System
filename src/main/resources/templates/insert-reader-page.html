@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Add Reader</title></head>
+<body>
+<h1>Add New Reader</h1>
+<form th:action="@{/reader/add}" th:object="${reader}" method="post">
+
+  <label>Name:</label><br/>
+  <input type="text" th:field="*{name}"/>
+  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></span>
+  <br/><br/>
+
+  <label>Surname:</label><br/>
+  <input type="text" th:field="*{surname}"/>
+  <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color:red;"></span>
+  <br/><br/>
+
+  <label>Library User Number:</label><br/>
+  <input type="text" th:field="*{libraryUserNumber}"/>
+  <span th:if="${#fields.hasErrors('libraryUserNumber')}" th:errors="*{libraryUserNumber}" style="color:red;"></span>
+  <br/><br/>
+
+  <button type="submit">Save</button>
+  <a href="/reader/all">Cancel</a>
+</form>
+</body>
+</html>

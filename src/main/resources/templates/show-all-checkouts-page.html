@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkouts</title></head>
+<body>
+<h1 th:text="${activeOnly} ? 'Active Checkouts' : 'All Checkouts'">Checkouts</h1>
+
+<a href="/checkout/new">+ New Checkout</a> &nbsp;|&nbsp;
+<a href="/checkout/active">Active Only</a> &nbsp;|&nbsp;
+<a href="/checkout/all">All</a>
+<br/><br/>
+
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>ID</th><th>Reader</th><th>Book</th><th>Checkout Date</th>
+      <th>Due Date</th><th>Returned?</th><th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="c : ${checkouts}">
+      <td th:text="${c.idc}"></td>
+      <td th:text="${c.reader.name + ' ' + c.reader.surname}"></td>
+      <td th:text="${c.book.title}"></td>
+      <td th:text="${c.checkoutDate}"></td>
+      <td th:text="${c.dueDate}"></td>
+      <td th:text="${c.returned} ? 'Yes' : 'No'"></td>
+      <td>
+        <a th:if="${!c.returned}"
+           th:href="@{/checkout/return/{id}(id=${c.idc})}">Return Book</a>
+        <span th:if="${c.returned}">—</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

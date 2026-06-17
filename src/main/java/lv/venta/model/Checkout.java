@@ -23,13 +23,13 @@ public class Checkout {
     @Column(name = "IS_RETURNED", nullable = false)
     private boolean returned;
 
-    // Many checkouts → one reader
+    // Many checkouts one reader
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IDR", nullable = false)
     private Reader reader;
 
-    // Many checkouts → one book
+    // Many checkouts one book
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IDB", nullable = false)

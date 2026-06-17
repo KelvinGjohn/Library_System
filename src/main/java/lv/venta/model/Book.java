@@ -55,7 +55,7 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Checkout> checkouts = new ArrayList<>();
 
-    // --- Constructors ---
+   
 
     public Book() {}
 
@@ -72,7 +72,7 @@ public class Book {
         this.libraryDepartment = libraryDepartment;
     }
 
-    // changeCondition() – as per spec
+   
     public void changeCondition(BookCondition newCondition) {
         this.condition = newCondition;
     }
@@ -86,22 +86,50 @@ public class Book {
     public void setIsbn(String isbn) { this.isbn = isbn; }
 
     public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
+    public void setYear(int year) {
+    	if (year >0 && year <= 2026) {this.year =year;
+    	}else {
+    		throw new IllegalArgumentException("invalid year");
+    	}
+	}
 
     public String getAuthor() { return author; }
     public void setAuthor(String author) { this.author = author; }
 
-    public String getTitle() { return title; }
+    public void settTitle(String title) {
+    	if (title != null && !title.trim().isEmpty()) {
+    		this.title = title;
+    	} else {
+    		this .title = "Unkown";
+    	}
+    	}
     public void setTitle(String title) { this.title = title; }
 
-    public double getRating() { return rating; }
-    public void setRating(double rating) { this.rating = rating; }
+    public double getRating() {
+    	return rating;
+    }
+    	
+    public void setRating(double rating) { 
+    	if(rating >= 0.0 && rating <= 5.0) {
+    		this.rating = rating;
+    	} else {
+    		throw new IllegalArgumentException("Rating must be between 0.0 and 5.0");
+    	}
+    
+    }
 
     public BookCondition getCondition() { return condition; }
     public void setCondition(BookCondition condition) { this.condition = condition; }
 
     public String getRarity() { return rarity; }
-    public void setRarity(String rarity) { this.rarity = rarity; }
+    
+    public String checkRarity() {
+        if (this.rarity == null) {
+            return "Not Specified";
+        } else {
+            return this.rarity;
+        }
+    }
 
     public LibraryDepartment getLibraryDepartment() { return libraryDepartment; }
     public void setLibraryDepartment(LibraryDepartment libraryDepartment) {
@@ -118,4 +146,14 @@ public class Book {
                 + ", rating=" + rating + ", condition=" + condition
                 + ", rarity='" + rarity + "'}";
     }
+
+	public void setRarity(String rarity2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
